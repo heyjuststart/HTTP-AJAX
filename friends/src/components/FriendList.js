@@ -1,8 +1,17 @@
 import React from 'react';
 
-const FriendList = ({ friends }) => (
+import Friend from './Friend';
+
+const FriendList = ({ deleteFriend, editFriend, friends }) => (
   <>
-    { friends.map( f => <div className='friend' key={f.id}>{ f.name }</div> ) }
+    {friends.map(f => (
+      <Friend
+        key={f.id}
+        friend={f}
+        deleteFriend={deleteFriend}
+        editFriend={editFriend}
+      />
+    ))}
   </>
 );
 

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import FriendList from './components/FriendList';
 import './App.css';
+import FriendList from './components/FriendList';
+import FriendForm from './components/FriendForm';
 
 class App extends Component {
   state = {
@@ -18,10 +19,23 @@ class App extends Component {
 
   addFriend = friend => {
     axios
-      .post('/friends', friend)
-      .then(({ data }) =>
-        this.setState({ friends: [...this.state.friends, data] })
-      );
+      .post('http://localhost:5000/friends', friend)
+      .then(({ data }) => this.setState({ friends: data }))
+      .catch(console.log);
+  };
+
+  editFriend = friend => {
+    axios
+      .put(`http://localhost:5000/friends/${friend.id}`, friend)
+      .then(({ data }) => this.setState({ friends: data }))
+      .catch(console.log);
+  };
+
+  deleteFriend = friend => {
+    axios
+      .delete(`http://localhost:5000/friends/${friend.id}`)
+      .then(({ data }) => this.setState({ friends: data }))
+      .catch(console.log);
   };
 
   render() {
@@ -29,7 +43,12 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Friends</h1>
-        <FriendList friends={friends} />
+        <FriendList
+          friends={friends}
+          editFriend={this.editFriend}
+          deleteFriend={this.deleteFriend}
+        />
+        <FriendForm addFriend={this.addFriend} />
       </div>
     );
   }
