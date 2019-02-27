@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import './App.css';
 import FriendList from './components/FriendList';
@@ -52,7 +52,11 @@ class App extends Component {
         <Route
           exact
           path="/"
-          render={() => <Link to="/friends/new">Add Friend</Link>}
+          render={props => (
+            <button onClick={() => props.history.push('/friends/new')}>
+              Add Friend
+            </button>
+          )}
         />
         <Route
           path="/friends/new"
