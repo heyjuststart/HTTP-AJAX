@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Route, Link } from 'react-router-dom';
 
 import './App.css';
 import FriendList from './components/FriendList';
@@ -48,7 +49,15 @@ class App extends Component {
           editFriend={this.editFriend}
           deleteFriend={this.deleteFriend}
         />
-        <FriendForm addFriend={this.addFriend} />
+        <Route
+          exact
+          path="/"
+          render={() => <Link to="/friends/new">Add Friend</Link>}
+        />
+        <Route
+          path="/friends/new"
+          render={props => <FriendForm {...props} addFriend={this.addFriend} />}
+        />
       </div>
     );
   }

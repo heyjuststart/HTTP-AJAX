@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-
-const FriendForm = ({ friend, addFriend }) => {
+const FriendForm = ({ history, friend, addFriend }) => {
   const initialState = friend || { name: '', age: '', email: '' };
   const [values, setValues] = useState(initialState);
 
@@ -14,6 +13,7 @@ const FriendForm = ({ friend, addFriend }) => {
         e.preventDefault();
         addFriend(values);
         setValues(initialState);
+        history && history.push('/');
       }}
     >
       <input
