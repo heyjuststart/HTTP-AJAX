@@ -12,7 +12,7 @@ const Friend = ({ deleteFriend, editFriend, friend }) => {
   } else {
     return (
       <div className="friend">
-        {friend.name}
+        <span className="name">{friend.name},{friend.age},{friend.email}</span>
         <button onClick={() => setIsEditing(true)}>edit</button>
         <button onClick={() => deleteFriend(friend)}>x</button>
       </div>

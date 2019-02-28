@@ -9,6 +9,7 @@ const FriendForm = ({ history, friend, addFriend }) => {
 
   return (
     <form
+      className="friend"
       onSubmit={e => {
         e.preventDefault();
         addFriend(values);
