@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Button } from './Common';
 
-const FriendForm = ({ history, friend, addFriend }) => {
+const FriendForm = styled.form`
+  background-color: lightblue;
+  padding: 30px 60px;
+  margin: 10px;
+`;
+
+export default ({ history, friend, addFriend, cancel }) => {
   const initialState = friend || { name: '', age: '', email: '' };
   const [values, setValues] = useState(initialState);
 
@@ -8,7 +16,7 @@ const FriendForm = ({ history, friend, addFriend }) => {
     setValues({ ...values, [e.target.name]: e.target.value });
 
   return (
-    <form
+    <FriendForm
       className="friend"
       onSubmit={e => {
         e.preventDefault();
@@ -38,9 +46,12 @@ const FriendForm = ({ history, friend, addFriend }) => {
         autoComplete="off"
         placeholder="email..."
       />
-      <button type="submit">submit</button>
-    </form>
+      <Button type="submit">submit</Button>
+      <Button default onClick={e => {
+        e.preventDefault();
+        cancel && cancel();
+        setValues(initialState);
+      }}>cancel</Button>
+    </FriendForm>
   );
 };
-
-export default FriendForm;
