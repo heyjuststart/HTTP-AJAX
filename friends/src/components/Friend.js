@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import FriendForm from './FriendForm';
 import styled from 'styled-components';
-import { Spring } from 'react-spring/renderprops';
 import { Button } from './Common';
 
 const Friend = styled.div`
@@ -14,7 +13,7 @@ export const Name = styled.span`
   padding-right: 10px;
 `;
 
-export default ({ deleteFriend, editFriend, friend }) => {
+export default ({ deleteFriend, style, editFriend, friend }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   if (isEditing) {
@@ -24,27 +23,19 @@ export default ({ deleteFriend, editFriend, friend }) => {
           setIsEditing(false);
           editFriend(f);
         }}
-        cancel={() => setIsEditing(false)}
+        cancel={ () => setIsEditing(false) }
         friend={friend}
       />
     );
   } else {
     return (
-      <Spring from={{ opacity: 0 }} to={{opacity: 1}}>
-        { style =>
-          <Friend style={style}>
-            <Name>
-              {friend.name},{friend.age},{friend.email}
-            </Name>
-            <Button default onClick={() => setIsEditing(true)}>
-              edit
-            </Button>
-            <Button error onClick={() => deleteFriend(friend)}>
-              x
-            </Button>
-          </Friend>
-        }
-      </Spring>
+      <Friend style={style}>
+        <Name>
+          {friend.name},{friend.age},{friend.email}
+        </Name>
+        <Button default onClick={() => setIsEditing(true)}>edit</Button>
+        <Button error onClick={() => deleteFriend(friend)}>x</Button>
+      </Friend>
     );
   }
 };
