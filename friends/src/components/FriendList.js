@@ -24,11 +24,3 @@ const FriendList = ({ deleteFriend, editFriend, friends }) => (
 );
 
 export default FriendList;
-// {friends.map(f => (
-//   <Friend
-//     key={f.id}
-//     friend={f}
-//     deleteFriend={deleteFriend}
-//     editFriend={editFriend}
-//   />
-// ))}
